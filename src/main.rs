@@ -1,10 +1,13 @@
 // update this file with your own tests
 use std::fs::OpenOptions;
+use std::env;
 use std::io;
 use std::io::{BufRead, BufReader, Write, Seek, SeekFrom};
 
 fn main() {
-    let file = OpenOptions::new().read(true).write(true).create(true).open("file.txt");
+    let args : Vec<String> = env::args().collect();
+    println!("{:?}", args);
+    let file = OpenOptions::new().read(true).write(true).create(true).open(&args[1]);
     match file {
         Ok(mut file) => {
             let mut message = String::new();
